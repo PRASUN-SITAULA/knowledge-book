@@ -17,13 +17,17 @@ pipeline{
 
         stage("Install Dependencies"){
             steps{
-                sh 'npm install'
+                withNodejs("nodejs"){
+                    sh 'npm install'
+                }
             }
         }
 
         stage("Lint"){
             steps{
-                sh 'npm lint'
+                withNodejs("nodejs"){
+                    sh 'npm lint'
+                }
             }
         }
     }
