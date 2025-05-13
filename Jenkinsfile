@@ -6,7 +6,8 @@ pipeline{
         stage("Git Checkout"){
             steps{
                 git branch: 'main',
-                    url: "https://github.com/PRASUN-SITAULA/knowledge-book.git"
+                    url: "https://github.com/PRASUN-SITAULA/knowledge-book.git",
+                    credentialsId: 'GITHUB_TOKEN'
             }
         }
 
