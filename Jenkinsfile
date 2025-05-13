@@ -5,8 +5,16 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git branch 'main',
+                git branch: 'main',
                     url: "https://github.com/PRASUN-SITAULA/knowledge-book.git"
+            }
+        }
+
+         stage('Setup Node.js') {
+            steps {
+                nodejs('nodejs-18') {
+                    sh 'node --version && npm --version'
+                }
             }
         }
 
