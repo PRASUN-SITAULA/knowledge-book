@@ -1,9 +1,7 @@
 pipeline{
     // for production environment use a dedicated agent for running tasks
-    agent any
-
-    tools {
-        NodeJS "nodejs"
+    agent {
+        label 'react-agent'
     }
 
     stages{
