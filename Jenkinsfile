@@ -17,7 +17,7 @@ pipeline{
 
         stage("Install Dependencies"){
             steps{
-                withNodejs("nodejs"){
+                nodejs("nodejs"){
                     sh 'npm install'
                 }
             }
@@ -25,7 +25,7 @@ pipeline{
 
         stage("Lint"){
             steps{
-                withNodejs("nodejs"){
+                nodejs("nodejs"){
                     sh 'npm lint'
                 }
             }
