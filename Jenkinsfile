@@ -2,6 +2,10 @@ pipeline{
     // for production environment use a dedicated agent for running tasks
     agent any
 
+    tools {
+        nodejs "nodejs"
+    }
+
     stages{
         stage("Git Checkout"){
             steps{
