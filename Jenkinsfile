@@ -11,14 +11,6 @@ pipeline{
             }
         }
 
-         stage('Setup Node.js') {
-            steps {
-                nodejs('nodejs-18') {
-                    sh 'node --version && npm --version'
-                }
-            }
-        }
-
         stage("Install Dependencies"){
             steps{
                 sh 'npm install'
