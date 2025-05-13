@@ -1,0 +1,41 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:alpine
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "50000:50000" # For agent connections
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      # The below line is used to create an initial configuration file
+      # - ./init.groovy.d:/usr/share/jenkins/ref/init.groovy.d
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins # base path is /jenkins to avoid conflict
+      # the below line prevents the initial setup of the jenkins. It uses init.groovy.d to setup on startup
+      # - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    networks:
+      - jenkins_network
+    user: root
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 1m30s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4G
+
+networks:
+  jenkins_network:
+    driver: bridge
+
+volumes:
+  jenkins_home:
+    name: jenkins_home
