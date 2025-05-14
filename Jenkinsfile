@@ -1,9 +1,10 @@
 pipeline{
     // for production environment use a dedicated agent for running tasks
-    agent {
-        label 'react-agent'
-    }
+    agent any
 
+    tools{
+        nodejs 'nodejs'
+    }
     stages{
         stage("Git Checkout"){
             steps{
@@ -14,18 +15,14 @@ pipeline{
         }
 
         stage("Install Dependencies"){
-            steps{
-                node("nodejs"){
-                    sh 'npm install'
-                }
+            steps {
+                sh 'npm install'
             }
         }
 
         stage("Lint"){
-            steps{
-                node("nodejs"){
-                    sh 'npm run lint'
-                }
+            steps {
+                sh 'npm run lint'
             }
         }
     }
