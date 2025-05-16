@@ -41,7 +41,12 @@ pipeline {
         stage("s3 Upload"){
             steps {
                 withAWS(credentials: "AWS_CREDENTIALS_ID", region: "${AWS_REGION}") {
-                    sh 'aws s3 sync dist/ s3://${S3_BUCKET}/ --delete --acl public-read'
+                    s3Upload(
+                        bucket: "${S3_BUCKET}",
+                        includePathPattern: '**/*',
+                        workingDir: 'dist',
+                        acl: 'PublicRead'
+                    )
                 }
             }
         }
