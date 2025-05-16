@@ -1,9 +1,14 @@
-pipeline{
+pipeline {
     // for production environment use a dedicated agent for running tasks
     agent any
 
     tools{
         nodejs 'nodejs'
+    }
+
+    environment {
+        AWS_REGION = 'us-east-1'
+        S3_BUCKET = 'knowledgebookbucket'
     }
 
     stages{
@@ -30,6 +35,14 @@ pipeline{
         stage("Build"){
             steps {
                 sh 'npm run build'
+            }
+        }
+
+        stage("s3 Upload"){
+            steps {
+                withAWS(credentials: "AWS_CREDENTIALS_ID", region: "${AWS_REGION}") {
+                    sh 'aws s3 sync dist/ s3://${S3_BUCKET}/ --delete --acl public-read'
+                }
             }
         }
     }
