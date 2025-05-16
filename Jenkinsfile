@@ -45,7 +45,6 @@ pipeline {
                         bucket: "${S3_BUCKET}",
                         includePathPattern: '**/*',
                         workingDir: 'dist',
-                        acl: 'PublicRead'
                     )
                 }
             }
