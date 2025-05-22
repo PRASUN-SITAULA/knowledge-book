@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This documents my journey of creating a jenkins pipleine for a react project and deploying it to s3 bucket.
+This documents my journey of creating a jenkins pipeline for a react project and deploying it to s3 bucket.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -21,6 +21,7 @@ Visit localhost:8080/jenkins to access the jenkins server. The administrator pas
 ## Jenkins Configuration
 
 - Install these plugins
+    - Blue Ocean
     - NodeJS
       - setup nodejs as a global tool
     - Pipeline AWS Steps
@@ -47,9 +48,9 @@ Visit localhost:8080/jenkins to access the jenkins server. The administrator pas
 - Select the branch
 - Select credentials added to the Jenkins
 
-<$>[info]
-**Info:** Since the server is running locally, the pipeline has to be built manually or through creating a Poll SCM. For production use cases, github webhooks can be used.
-<$>
+
+> [!NOTE]
+> **NOTE:** Since the server is running locally, the pipeline has to be built manually or through creating a Poll SCM. For production use cases, github webhooks can be used.
 
 ## Issues Faced
 
